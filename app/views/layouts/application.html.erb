@@ -11,6 +11,26 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= link_to root_path do %>
+        <h1>B&B</h1>
+      <% end %>
+      <nav>
+        <% if user_signed_in? %>
+          <%= current_user.email %>
+          <p><%= button_to 'Sign out' %></p>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path %>
+        <% end %>
+      </nav>
+
+      <%= yield %>
+    </header>
+    <main>
+      <div>
+        <p><%= notice %></p>
+        <p><%= alert %></p>
+      </div>
+    </main>
   </body>
 </html>
