@@ -18,7 +18,7 @@
       <nav>
         <% if user_signed_in? %>
           <%= current_user.email %>
-          <p><%= button_to 'Sign out' %></p>
+          <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
         <% else %>
           <%= link_to 'Sign in', new_user_session_path %>
         <% end %>
