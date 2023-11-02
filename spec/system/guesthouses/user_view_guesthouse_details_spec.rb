@@ -19,7 +19,7 @@ describe 'Host user sees guesthouse details' do
     payment_method = PaymentMethod.create!(name: 'Dinheiro')
 
     Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
-                        phone_number: '9876-54321', email: 'hilton@hilton.com', full_address: full_address,
+                        phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
                         description: 'Em frente a orla', payment_method: payment_method, pet_friendly: 'Sim',
                         terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa')
 
@@ -30,7 +30,7 @@ describe 'Host user sees guesthouse details' do
     expect(page).to have_content('Pousada Hilton')
     expect(page).to have_content('Hilton Corporate')
     expect(page).to have_content('123456789')
-    expect(page).to have_content('9876-54321')
+    expect(page).to have_content('98765-4321')
     expect(page).to have_content('hilton@hilton.com')
     expect(page).to have_content('Av Atlântica, 500 - Copacabana - Rio de Janeiro - RJ - Zip Code: 12012-001')
     expect(page).to have_content('Em frente a orla')
@@ -40,5 +40,15 @@ describe 'Host user sees guesthouse details' do
     expect(page).to have_content('8:00')
     expect(page).to have_content('9:00')
     expect(page).to have_content('Ativa')
+  end
+
+  it 'and there is no registered guesthouse' do
+    host = User.create!(email: 'host@email.com', password: '123456')
+
+    login_as(host)
+    visit root_path
+    click_on 'My Guesthouse'
+
+    expect(page).to have_content('There is no registered guesthouse')
   end
 end
