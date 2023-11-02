@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User authenticates' do
-  it 'sucessfully' do
+  it 'successfully' do
     User.create!(email: 'host@email.com', password: '123456')
 
     visit root_path

@@ -1,0 +1,2 @@
+class FullAddress < ApplicationRecord
+end

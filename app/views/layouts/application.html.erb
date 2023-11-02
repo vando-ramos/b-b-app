@@ -15,9 +15,10 @@
       <%= link_to root_path do %>
         <h1>B&B</h1>
       <% end %>
-      <nav>
-        <% if user_signed_in? %>
+      <nav>        
+        <% if user_signed_in? %>      
           <%= current_user.email %>
+          <p><%= link_to 'My Guesthouse', guesthouses_path %></p>
           <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
         <% else %>
           <%= link_to 'Sign in', new_user_session_path %>
