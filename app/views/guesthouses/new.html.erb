@@ -1,0 +1,80 @@
+<h1>New Guesthouse</h1>
+
+<%= form_with model: @guesthouse do |f| %>
+  <div>
+    <%= f.label :brand_name, 'Brand Name' %>
+    <%= f.text_field :brand_name %>
+
+    <%= f.label :corporate_name, 'Corporate Name' %>
+    <%= f.text_field :corporate_name %>
+  </div> 
+  <div>
+    <%= f.label :register_number, 'Register Number' %>
+    <%= f.text_field :register_number %>
+  </div>
+  <div>
+    <%= f.label :phone_number, 'Phone Number' %>
+    <%= f.number_field :phone_number %>
+  </div>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>  
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :pet_friendly, 'Pet Friendly' %>
+    <%= f.select :pet_friendly, ['Yes', 'No'] %>
+  </div>
+  <div>
+    <%= f.label :terms %>
+    <%= f.text_area :terms %>
+  </div>
+  <div>
+    <%= f.label :check_in_time %>
+    <%= f.time_field :check_in_time %>
+
+    <%= f.label :check_out_time %>
+    <%= f.time_field :check_out_time %>  </div>
+  
+  <div>
+    <%= f.label :status %>
+    <%= f.select :status, ['Active', 'Inactive'] %>
+  </div>
+<br>
+  <%= f.fields_for :full_address, FullAddress.new do |fa| %>Full Address
+    <div>
+      <%= fa.label :address %>
+      <%= fa.text_field :address %>
+
+      <%= fa.label :number %>
+      <%= fa.number_field :number %>
+
+      <%= fa.label :neighborhood %>
+      <%= fa.text_field :neighborhood %>
+
+      <%= fa.label :city %>
+      <%= fa.text_field :city %>
+
+      <%= fa.label :state %>
+      <%= fa.text_field :state %>
+    </div>
+    <div>
+      <%= fa.label :zip_code, 'Zip Code' %>
+      <%= fa.number_field :zip_code %>
+
+      <%= fa.label :complement %>
+      <%= fa.text_field :complement %>
+    </div> 
+  <% end %>
+  <br>   
+
+    <%= f.label :payment_method_ids, 'Payment Methods:' %>
+    <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name %>
+
+  <div>
+    <p><%= f.submit 'Send' %></p>
+  </div>
+<% end %>

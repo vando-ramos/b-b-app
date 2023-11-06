@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Host user sees guesthouse details' do
+describe 'Host user register your guesthouse' do
   it 'if authenticated' do
     visit root_path
     within('nav') do
@@ -13,20 +13,36 @@ describe 'Host user sees guesthouse details' do
   it 'successfully' do
     host = User.create!(email: 'host@email.com', password: '123456')
 
-    full_address = FullAddress.create!(address: 'Av Atlântica', number: 500, neighborhood: 'Copacabana',
+    full_address = FullAddress.create!(address: 'Av Atlântica, 500', neighborhood: 'Copacabana',
                                         city: 'Rio de Janeiro', state: 'RJ', zip_code: '12012-001')
 
-    payment_method = GuesthousePaymentMethod.create!(name: 'Dinheiro')
-
-    Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
-                        phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
-                        description: 'Em frente a orla', payment_method: payment_method, pet_friendly: 'Sim',
-                        terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa')
+    payment_method = PaymentMethod.create!(name: 'Dinheiro')
 
     login_as(host)
     visit root_path
     click_on 'My Guesthouse'
+    click_on 'Register Your Guesthouse'
+    fill_in 'Brand Name', with: 'Pousada Hilton'
+    fill_in 'Corporate Name', with: 'Hilton Corporate'
+    fill_in 'Register Number', with: '123456789'
+    fill_in 'Phone Number', with: '98765-4321'
+    fill_in 'Email', with: 'hilton@hilton.com'
+    fill_in 'Address', with: 'Av Atlântica'
+    fill_in 'Number', with: '500'
+    fill_in 'Neighborhood', with: 'Copacabana'
+    fill_in 'City', with: 'Rio de Janeiro'
+    fill_in 'State', with: 'RJ'
+    fill_in 'Zip Code', with: '12012-001'
+    fill_in 'Description', with: 'Em frente a orla'
+    check 'Dinheiro' # In Payment Methods
+    # fill_in 'Pet Friendly', with: 'Sim'
+    fill_in 'Terms', with: 'Proibido fumar'
+    fill_in 'Check in time', with: '8:00'
+    fill_in 'Check out time', with: '9:00'
+    # fill_in 'Status', with: 'Ativa'
+    click_on 'Send'
 
+    expect(page).to have_content('Guesthouse registered successfully')
     expect(page).to have_content('Pousada Hilton')
     expect(page).to have_content('Hilton Corporate')
     expect(page).to have_content('123456789')
@@ -40,15 +56,5 @@ describe 'Host user sees guesthouse details' do
     expect(page).to have_content('8:00')
     expect(page).to have_content('9:00')
     expect(page).to have_content('Ativa')
-  end
-
-  it 'and there is no registered guesthouse' do
-    host = User.create!(email: 'host@email.com', password: '123456')
-
-    login_as(host)
-    visit root_path
-    click_on 'My Guesthouse'
-
-    expect(page).to have_content('There is no registered guesthouse')
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_01_224118) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_03_203749) do
   create_table "full_addresses", force: :cascade do |t|
     t.string "address"
     t.string "neighborhood"
@@ -19,6 +19,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_224118) do
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
+    t.string "complement"
+  end
+
+  create_table "guesthouse_payment_methods", force: :cascade do |t|
+    t.integer "guesthouse_id", null: false
+    t.integer "payment_method_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guesthouse_id"], name: "index_guesthouse_payment_methods_on_guesthouse_id"
+    t.index ["payment_method_id"], name: "index_guesthouse_payment_methods_on_payment_method_id"
   end
 
   create_table "guesthouses", force: :cascade do |t|
@@ -34,11 +45,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_224118) do
     t.datetime "check_out_time"
     t.string "status"
     t.integer "full_address_id", null: false
-    t.integer "payment_method_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["full_address_id"], name: "index_guesthouses_on_full_address_id"
-    t.index ["payment_method_id"], name: "index_guesthouses_on_payment_method_id"
   end
 
   create_table "payment_methods", force: :cascade do |t|
@@ -60,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_224118) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "guesthouse_payment_methods", "guesthouses"
+  add_foreign_key "guesthouse_payment_methods", "payment_methods"
   add_foreign_key "guesthouses", "full_addresses"
-  add_foreign_key "guesthouses", "payment_methods"
 end
