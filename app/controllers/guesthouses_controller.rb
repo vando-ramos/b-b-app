@@ -1,6 +1,9 @@
 class GuesthousesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @guesthouses = Guesthouse.all
+    @payment_methods = PaymentMethod.all
   end
 
   def new
@@ -10,15 +13,17 @@ class GuesthousesController < ApplicationController
   def create
     @guesthouse = Guesthouse.new(guesthouse_params)
 
-    selected_payment_methods = PaymentMethod.find(params[:guesthouse][:payment_method_ids])
-    @guesthouse.payment_methods << selected_payment_methods
-
     if @guesthouse.save
       redirect_to @guesthouse, notice: 'Guesthouse registered successfully!'
     else
       flash.now.alert = 'Unable to register guesthouse!'
       render :new
     end
+  end
+
+  def show
+    @guesthouse = Guesthouse.find(params[:id])
+    @payment_methods = PaymentMethod.all
   end
 
   private
@@ -40,4 +45,8 @@ class GuesthousesController < ApplicationController
       payment_method_ids: []
       )
   end
+
+  # def check_user_type
+
+  # end
 end

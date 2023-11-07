@@ -17,10 +17,11 @@
       <% end %>
       <nav>        
         <% if user_signed_in? %>
+          <%= link_to 'My Guesthouse', guesthouses_path %>  |
           <%= current_user.email %>
-          <p><%= link_to 'My Guesthouse', guesthouses_path %></p>
           <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
         <% else %>
+          <%= link_to 'Register Your Guesthouse', new_user_session_path %> |
           <%= link_to 'Sign in', new_user_session_path %>
         <% end %>
       </nav>

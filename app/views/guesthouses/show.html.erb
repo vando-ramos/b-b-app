@@ -1,0 +1,45 @@
+<h1><%= @guesthouse.brand_name %></h1>
+  <dl>       
+    <strong><dt>Corporate Name</dt></strong>
+    <dd><%= @guesthouse.corporate_name %></dd>  
+
+    <strong><dt>Register Number</dt></strong>
+    <dd><%= @guesthouse.register_number %></dd>  
+
+    <strong><dt>Phone Number</dt></strong>
+    <dd><%= @guesthouse.phone_number %></dd>  
+
+    <strong><dt>Email</dt></strong>
+    <dd><%= @guesthouse.email %></dd>  
+
+    <strong><dt>Full Address</dt></strong>
+    <dd>
+      <%= @guesthouse.full_address.address %>, <%= @guesthouse.full_address.number %> - <%= @guesthouse.full_address.neighborhood %> -
+      <%= @guesthouse.full_address.city %> - <%= @guesthouse.full_address.state %> - Zip Code: <%= @guesthouse.full_address.zip_code %> -
+      Complement: <%= @guesthouse.full_address.complement %>
+    </dd>  
+
+    <strong><dt>Payment Methods</dt></strong>
+    <% @payment_methods.each do |pm| %>
+      <dd><%= pm.name %></dd>
+    <% end %>
+
+    <strong><dt>Pet Friendly</dt></strong>
+    <dd><%= @guesthouse.pet_friendly %></dd>  
+
+    <strong><dt>Check in Time</dt></strong>
+    <dd><%= @guesthouse.check_in_time %></dd>  
+
+    <strong><dt>Check out Time</dt></strong>
+    <dd><%= @guesthouse.check_out_time %></dd>  
+
+    <strong><dt>Description</dt></strong>
+    <dd><%= @guesthouse.description %></dd>  
+
+    <strong><dt>Terms</dt></strong>
+    <dd><%= @guesthouse.terms %></dd>  
+
+    <strong><dt>Status</dt></strong>
+    <dd><%= @guesthouse.status %></dd>  
+  </dl>
+
