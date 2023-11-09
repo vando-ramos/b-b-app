@@ -25,14 +25,14 @@
           <%= link_to 'Sign in', new_user_session_path %>
         <% end %>
       </nav>
+      <main>
+        <div>
+          <p><%= alert %></p>
+          <p><%= notice %></p>          
+        </div>
 
-      <%= yield %>
-    </header>
-    <main>
-      <div>
-        <p><%= notice %></p>
-        <p><%= alert %></p>
-      </div>
-    </main>
+        <%= yield %>
+      </main>      
+    </header>    
   </body>
 </html>

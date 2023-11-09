@@ -20,26 +20,28 @@
     </dd>  
 
     <strong><dt>Payment Methods</dt></strong>
-    <% @payment_methods.each do |pm| %>
+    <% @guesthouse.payment_methods.each do |pm| %>
       <dd><%= pm.name %></dd>
     <% end %>
 
     <strong><dt>Pet Friendly</dt></strong>
-    <dd><%= @guesthouse.pet_friendly %></dd>  
+    <dd><%= @guesthouse.pet_friendly %></dd>
 
     <strong><dt>Check in Time</dt></strong>
-    <dd><%= @guesthouse.check_in_time %></dd>  
+    <dd><%= @guesthouse.check_in_time %></dd>
 
     <strong><dt>Check out Time</dt></strong>
-    <dd><%= @guesthouse.check_out_time %></dd>  
+    <dd><%= @guesthouse.check_out_time %></dd>
 
     <strong><dt>Description</dt></strong>
-    <dd><%= @guesthouse.description %></dd>  
+    <dd><%= @guesthouse.description %></dd>
 
     <strong><dt>Terms</dt></strong>
-    <dd><%= @guesthouse.terms %></dd>  
+    <dd><%= @guesthouse.terms %></dd>
 
     <strong><dt>Status</dt></strong>
-    <dd><%= @guesthouse.status %></dd>  
+    <dd><%= @guesthouse.status %></dd>
   </dl>
+
+  <p><%= link_to 'Edit', edit_guesthouse_path %></p>
 

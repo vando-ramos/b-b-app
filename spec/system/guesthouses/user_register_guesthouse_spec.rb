@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Host user register your guesthouse' do
+describe 'A host user register your guesthouse' do
   it 'if authenticated' do
     visit root_path
     within('nav') do
@@ -12,10 +12,6 @@ describe 'Host user register your guesthouse' do
 
   it 'successfully' do
     host = User.create!(email: 'host@email.com', password: '123456')
-
-    full_address = FullAddress.create!(address: 'Av Atlântica, 500', neighborhood: 'Copacabana',
-                                        city: 'Rio de Janeiro', state: 'RJ', zip_code: '12012-001')
-
     payment_method = PaymentMethod.create!(name: 'Dinheiro')
 
     login_as(host)
@@ -34,12 +30,12 @@ describe 'Host user register your guesthouse' do
     fill_in 'State', with: 'RJ'
     fill_in 'Zip Code', with: '12012-001'
     fill_in 'Description', with: 'Em frente a orla'
-    check 'Dinheiro' # In Payment Methods
-    # fill_in 'Pet Friendly', with: 'Sim'
+    check 'Dinheiro'
+    select "Sim", from: "Pet Friendly"
     fill_in 'Terms', with: 'Proibido fumar'
     fill_in 'Check in time', with: '8:00'
     fill_in 'Check out time', with: '9:00'
-    # fill_in 'Status', with: 'Ativa'
+    select 'Ativa', from: 'Status'
     click_on 'Send'
 
     expect(page).to have_content('Guesthouse registered successfully')
@@ -56,5 +52,42 @@ describe 'Host user register your guesthouse' do
     expect(page).to have_content('8:00')
     expect(page).to have_content('9:00')
     expect(page).to have_content('Ativa')
+  end
+
+  it 'with incomplete data' do
+    host = User.create!(email: 'host@email.com', password: '123456')
+
+    login_as(host)
+    visit root_path
+    click_on 'My Guesthouse'
+    click_on 'Register Your Guesthouse'
+    fill_in 'Brand Name', with: ''
+    fill_in 'Phone Number', with: ''
+    fill_in 'Email', with: ''
+    fill_in 'Zip Code', with: ''
+    fill_in 'Description', with: ''
+    fill_in 'Terms', with: ''
+    fill_in 'Check in time', with: ''
+    fill_in 'Check out time', with: ''
+    click_on 'Send'
+
+    expect(page).to have_content("Brand name can't be blank")
+    expect(page).to have_content("Phone number can't be blank")
+    expect(page).to have_content("Email can't be blank")
+    expect(page).to have_content("Full address zip code can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Terms can't be blank")
+    expect(page).to have_content("Check in time can't be blank")
+    expect(page).to have_content("Check out time can't be blank")
+  end
+
+  it 'and must only have one registered guesthouse' do
+    host = User.create!(email: 'host@email.com', password: '123456')
+
+    login_as(host)
+    visit root_path
+    click_on 'My Guesthouse'
+
+    expect()
   end
 end

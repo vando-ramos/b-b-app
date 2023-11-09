@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_guesthouse, only: %i[show edit update]
 
   def index
     @guesthouses = Guesthouse.all
@@ -17,13 +17,23 @@ class GuesthousesController < ApplicationController
       redirect_to @guesthouse, notice: 'Guesthouse registered successfully!'
     else
       flash.now.alert = 'Unable to register guesthouse!'
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @guesthouse = Guesthouse.find(params[:id])
-    @payment_methods = PaymentMethod.all
+  end
+
+  def edit
+  end
+
+  def update
+    if @guesthouse.update(guesthouse_params)
+      redirect_to @guesthouse, notice: 'Guesthouse updated successfully!'
+    else
+      flash.now.alert = 'Unable to update the guesthouse'
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -46,7 +56,7 @@ class GuesthousesController < ApplicationController
       )
   end
 
-  # def check_user_type
-
-  # end
+  def set_guesthouse
+    @guesthouse = Guesthouse.find(params[:id])
+  end
 end
