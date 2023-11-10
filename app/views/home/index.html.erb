@@ -1,1 +1,33 @@
-<h1>Welcome</h1>
+<h1>Guesthouses</h1>
+
+<div>
+  <%= link_to 'Register Your Guesthouse', new_guesthouse_path %>
+</div>
+
+<% @guesthouses.each do |g| %>
+  <div>
+    <h2><%= link_to g.brand_name, g %></h2>
+
+    <dl>
+      <strong><dt>Full Address</dt></strong>
+      <dd>
+        <%= g.full_address.address %>, <%= g.full_address.number %> - <%= g.full_address.neighborhood %> -
+        <%= g.full_address.city %> - <%= g.full_address.state %> - Zip Code: <%= g.full_address.zip_code %> -
+        Complement: <%= g.full_address.complement %>
+      </dd>
+
+      <strong><dt>Phone Number</dt></strong>
+      <dd><%= g.phone_number %></dd>  
+
+      <strong><dt>Email</dt></strong>
+      <dd><%= g.email %></dd>
+
+      <strong><dt>Description</dt></strong>
+      <dd><%= g.description %></dd>
+    </dl> 
+  </div>  
+<% end %>
+
+<% if @guesthouses.empty? %>
+  <p>There is no registered guesthouse!</p>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_203749) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_10_005855) do
   create_table "full_addresses", force: :cascade do |t|
     t.string "address"
     t.string "neighborhood"
@@ -47,7 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_203749) do
     t.integer "full_address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
     t.index ["full_address_id"], name: "index_guesthouses_on_full_address_id"
+    t.index ["user_id"], name: "index_guesthouses_on_user_id"
   end
 
   create_table "payment_methods", force: :cascade do |t|
@@ -72,4 +74,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_203749) do
   add_foreign_key "guesthouse_payment_methods", "guesthouses"
   add_foreign_key "guesthouse_payment_methods", "payment_methods"
   add_foreign_key "guesthouses", "full_addresses"
+  add_foreign_key "guesthouses", "users"
 end

@@ -1,17 +1,18 @@
 class GuesthousesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_guesthouse, only: %i[show edit update]
 
-  def index
-    @guesthouses = Guesthouse.all
-    @payment_methods = PaymentMethod.all
-  end
-
   def new
-    @guesthouse = Guesthouse.new
+    if current_user.guesthouse.present?
+      flash.alert = 'You already have a registered guesthouse.'
+      redirect_to current_user.guesthouse
+    else
+      @guesthouse = current_user.build_guesthouse
+    end
   end
 
   def create
-    @guesthouse = Guesthouse.new(guesthouse_params)
+    @guesthouse = current_user.build_guesthouse(guesthouse_params)
 
     if @guesthouse.save
       redirect_to @guesthouse, notice: 'Guesthouse registered successfully!'

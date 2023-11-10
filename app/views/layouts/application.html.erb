@@ -15,24 +15,22 @@
       <%= link_to root_path do %>
         <h1>B&B</h1>
       <% end %>
-      <nav>        
+      <nav>
         <% if user_signed_in? %>
-          <%= link_to 'My Guesthouse', guesthouses_path %>  |
           <%= current_user.email %>
           <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
-        <% else %>
-          <%= link_to 'Register Your Guesthouse', new_user_session_path %> |
+        <% else %>          
           <%= link_to 'Sign in', new_user_session_path %>
         <% end %>
       </nav>
-      <main>
-        <div>
-          <p><%= alert %></p>
-          <p><%= notice %></p>          
-        </div>
+    </header>
+    <main>
+      <div>
+        <p><%= alert %></p>
+        <p><%= notice %></p>          
+      </div>
 
-        <%= yield %>
-      </main>      
-    </header>    
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -23,11 +23,11 @@ describe 'A host user edits your guesthouse' do
     Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
                         phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
                         description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
-                        terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa')
+                        terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa',
+                        user: host)
 
     login_as(host)
     visit root_path
-    click_on 'My Guesthouse'
     click_on 'Pousada Hilton'
     click_on 'Edit'
     fill_in 'Brand Name', with: 'Pousada Hilton'
@@ -75,11 +75,11 @@ describe 'A host user edits your guesthouse' do
     Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
                         phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
                         description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
-                        terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa')
+                        terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa',
+                        user: host)
 
     login_as(host)
     visit root_path
-    click_on 'My Guesthouse'
     click_on 'Pousada Hilton'
     click_on 'Edit'
     fill_in 'Brand Name', with: ''

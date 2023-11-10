@@ -1,5 +1,6 @@
 class Guesthouse < ApplicationRecord
   belongs_to :full_address, dependent: :destroy
+  belongs_to :user
 
   has_many :guesthouse_payment_methods, dependent: :destroy
   has_many :payment_methods, through: :guesthouse_payment_methods

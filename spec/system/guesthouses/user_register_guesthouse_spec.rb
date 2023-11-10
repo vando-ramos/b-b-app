@@ -16,7 +16,6 @@ describe 'A host user register your guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'My Guesthouse'
     click_on 'Register Your Guesthouse'
     fill_in 'Brand Name', with: 'Pousada Hilton'
     fill_in 'Corporate Name', with: 'Hilton Corporate'
@@ -59,7 +58,6 @@ describe 'A host user register your guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'My Guesthouse'
     click_on 'Register Your Guesthouse'
     fill_in 'Brand Name', with: ''
     fill_in 'Phone Number', with: ''
@@ -84,10 +82,25 @@ describe 'A host user register your guesthouse' do
   it 'and must only have one registered guesthouse' do
     host = User.create!(email: 'host@email.com', password: '123456')
 
+    full_address = FullAddress.create!(address: 'Av Atlântica', number: 500, neighborhood: 'Copacabana',
+                                        city: 'Rio de Janeiro', state: 'RJ', zip_code: '12012-001')
+
+    pm1 = PaymentMethod.create!(name: 'Dinheiro')
+    pm2 = PaymentMethod.create!(name: 'Débito')
+    payment_methods = [pm1, pm2]
+
+    guesthouse = Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
+                                    phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
+                                    description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
+                                    terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa',
+                                    user: host)
+
     login_as(host)
     visit root_path
-    click_on 'My Guesthouse'
+    click_on 'Register Your Guesthouse'
 
-    expect()
+    expect(current_path).not_to eq(new_guesthouse_path)
+    expect(current_path).to eq(guesthouse_path(guesthouse.id))
+    expect(page).to have_content("You already have a registered guesthouse")
   end
 end
