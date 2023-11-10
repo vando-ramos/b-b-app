@@ -44,5 +44,8 @@
     <dd><%= @guesthouse.status %></dd>
   </dl>
 
-  <p><%= link_to 'Edit', edit_guesthouse_path %></p>
+  <% if current_user == @guesthouse.user %>
+    <p><%= link_to 'Edit', edit_guesthouse_path %></p>
+  <% end %>
+
 

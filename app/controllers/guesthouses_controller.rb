@@ -26,6 +26,10 @@ class GuesthousesController < ApplicationController
   end
 
   def edit
+    unless current_user == @guesthouse.user
+      flash.alert = "You don't have permission to edit this guesthouse."
+      redirect_to guesthouse_path
+    end
   end
 
   def update

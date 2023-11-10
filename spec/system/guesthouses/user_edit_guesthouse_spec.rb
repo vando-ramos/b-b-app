@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'A host user edits your guesthouse' do
+describe 'A host user edits a guesthouse' do
   it 'if authenticated' do
     visit root_path
     within('nav') do
@@ -93,5 +93,29 @@ describe 'A host user edits your guesthouse' do
     click_on 'Send'
 
     expect(page).to have_content('Unable to update the guesthouse')
+  end
+
+  it 'if is responsible for it' do
+    host = User.create!(email: 'host@email.com', password: '123456')
+    admin = User.create!(email: 'admin@email.com', password: '123456')
+
+    full_address = FullAddress.create!(address: 'Av Atlântica', number: 500, neighborhood: 'Copacabana',
+                                        city: 'Rio de Janeiro', state: 'RJ', zip_code: '12012-001')
+
+    pm1 = PaymentMethod.create!(name: 'Dinheiro')
+    pm2 = PaymentMethod.create!(name: 'Débito')
+    payment_methods = [pm1, pm2]
+
+    guesthouse = Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
+                                    phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
+                                    description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
+                                    terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa',
+                                    user: admin)
+
+    login_as(host)
+    visit edit_guesthouse_path(guesthouse.id)
+
+    expect(current_path).to eq(guesthouse_path(guesthouse.id))
+    expect(page).not_to have_link('Edit')
   end
 end
