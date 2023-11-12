@@ -67,9 +67,12 @@
       <%= fa.text_field :complement %>
     </div> 
   <% end %>
+
   <br>
+
     <%= f.label :payment_method_ids, 'Payment Methods:' %>
     <%= f.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name %>
+    
   <div>
     <p><%= f.submit 'Send' %></p>
   </div>
