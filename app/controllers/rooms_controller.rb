@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @room = set_guesthouse.rooms.build
     @room.build_custom_price

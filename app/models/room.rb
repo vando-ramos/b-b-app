@@ -6,4 +6,6 @@ class Room < ApplicationRecord
   has_many :amenities, through: :room_amenities
 
   accepts_nested_attributes_for :custom_price
+
+  validates :name, :description, :maximum_guests, :dimension, :daily_price, :status, presence: true
 end

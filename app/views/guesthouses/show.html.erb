@@ -1,93 +1,15 @@
 <h1><%= @guesthouse.brand_name %></h1>
 
-  <dl>       
-    <strong><dt>Corporate Name</dt></strong>
-    <dd><%= @guesthouse.corporate_name %></dd>  
+<%= render 'guesthouse' %>
 
-    <strong><dt>Register Number</dt></strong>
-    <dd><%= @guesthouse.register_number %></dd>  
-
-    <strong><dt>Phone Number</dt></strong>
-    <dd><%= @guesthouse.phone_number %></dd>  
-
-    <strong><dt>Email</dt></strong>
-    <dd><%= @guesthouse.email %></dd>  
-
-    <strong><dt>Full Address</dt></strong>
-    <dd>
-      <%= @guesthouse.full_address.address %>, <%= @guesthouse.full_address.number %> - 
-      <%= @guesthouse.full_address.neighborhood %> - <%= @guesthouse.full_address.city %> - 
-      <%= @guesthouse.full_address.state %> - Zip Code: <%= @guesthouse.full_address.zip_code %> -
-      Complement: <%= @guesthouse.full_address.complement %>
-    </dd>  
-
-    <strong><dt>Payment Methods</dt></strong>
-    <% @guesthouse.payment_methods.each do |pm| %>
-      <dd><%= pm.name %></dd>
-    <% end %>
-
-    <strong><dt>Pet Friendly</dt></strong>
-    <dd><%= @guesthouse.pet_friendly %></dd>
-
-    <strong><dt>Check in Time</dt></strong>
-    <dd><%= @guesthouse.check_in_time %></dd>
-
-    <strong><dt>Check out Time</dt></strong>
-    <dd><%= @guesthouse.check_out_time %></dd>
-
-    <strong><dt>Description</dt></strong>
-    <dd><%= @guesthouse.description %></dd>
-
-    <strong><dt>Terms</dt></strong>
-    <dd><%= @guesthouse.terms %></dd>
-
-    <strong><dt>Status</dt></strong>
-    <dd><%= @guesthouse.status %></dd>
-  </dl>
-
-  <% if current_user == @guesthouse.user %>
-    <p><%= link_to 'Edit', edit_guesthouse_path %></p>
-  <% end %>
+<% if current_user == @guesthouse.user %>
+  <p><%= link_to 'Edit', edit_guesthouse_path %></p>
+<% end %>
 
 <h2>Rooms</h2>
 <p><%= link_to 'Register Room', new_room_path %></p>
 
-<% @rooms.each do |r| %>
-  <div>
-    <h3><%= r.name %></h3>
-    <div  style='border: 1px solid'>
-      <dl>
-        <strong><dt>Description</dt></strong>
-        <dd><%= r.description %></dd>
-
-        <strong><dt>Maximum Guests</dt></strong>
-        <dd><%= r.maximum_guests %></dd>
-
-        <strong><dt>Dimension</dt></strong>
-        <dd><%= r.dimension %></dd>
-
-        <strong><dt>Amenities</dt></strong>
-        <% r.amenities.each do |a| %>
-          <dd><%= a.name %></dd>
-        <% end %>
-
-        <strong><dt>Daily Price</dt></strong>
-        <dd>$<%= r.daily_price %></dd>
-
-        <strong><dt>Status</dt></strong>
-        <dd><%= r.status %></dd>
-
-        <strong><dt>Custom Price</dt></strong>
-        <dd>           
-          De <%= r.custom_price.start_date %> até <%= r.custom_price.end_date %>
-        </dd>
-        <dd>
-          $<%= r.custom_price.daily_price %>
-        </dd>
-      </dl>
-    </div>
-  </div>
-<% end %>
+<%= render 'rooms' %>
 
 <% if @rooms.empty? %>
   <p>There are no registered rooms!</p>
