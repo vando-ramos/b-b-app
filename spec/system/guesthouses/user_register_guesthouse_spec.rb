@@ -34,7 +34,7 @@ describe 'A host user register your guesthouse' do
     fill_in 'Terms', with: 'Proibido fumar'
     fill_in 'Check in time', with: '8:00'
     fill_in 'Check out time', with: '9:00'
-    select 'Ativa', from: 'Status'
+    select 'ativa', from: 'Status'
     click_on 'Send'
 
     expect(page).to have_content('Guesthouse registered successfully')
@@ -50,7 +50,7 @@ describe 'A host user register your guesthouse' do
     expect(page).to have_content('Proibido fumar')
     expect(page).to have_content('8:00')
     expect(page).to have_content('9:00')
-    expect(page).to have_content('Ativa')
+    expect(page).to have_content('ativa')
   end
 
   it 'with incomplete data' do
@@ -92,7 +92,7 @@ describe 'A host user register your guesthouse' do
     guesthouse = Guesthouse.create!(brand_name: 'Pousada Hilton', corporate_name: 'Hilton Corporate', register_number: '123456789',
                                     phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
                                     description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
-                                    terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'Ativa',
+                                    terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'ativa',
                                     user: host)
 
     login_as(host)

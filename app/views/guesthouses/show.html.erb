@@ -1,4 +1,5 @@
 <h1><%= @guesthouse.brand_name %></h1>
+
   <dl>       
     <strong><dt>Corporate Name</dt></strong>
     <dd><%= @guesthouse.corporate_name %></dd>  
@@ -47,5 +48,35 @@
   <% if current_user == @guesthouse.user %>
     <p><%= link_to 'Edit', edit_guesthouse_path %></p>
   <% end %>
+
+<h2>Rooms</h2>
+
+<% @rooms.each do |r| %>
+  <div style='border: 1px solid'>
+    <h3><%= r.name %></h3>
+    <dl>
+      <strong><dt>Description</dt></strong>
+      <dd><%= r.description %></dd>
+
+      <strong><dt>Maximum Guests</dt></strong>
+      <dd><%= r.maximum_guests %></dd>
+
+      <strong><dt>Dimension</dt></strong>
+      <dd><%= r.dimension %></dd>
+
+      <strong><dt>Amenities</dt></strong>
+      <% r.amenities.each do |a| %>
+        <dd><%= a.name %></dd>
+      <% end %>
+
+      <strong><dt>Daily Price</dt></strong>
+      <dd>$<%= r.daily_price %></dd>
+    </dl>
+  </div>
+<% end %>
+
+<% if @rooms.empty? %>
+  <p>There are no registered rooms!</p>
+<% end %>
 
 

@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[show]
   before_action :set_guesthouse, only: %i[show edit update]
 
   def new
@@ -23,6 +23,7 @@ class GuesthousesController < ApplicationController
   end
 
   def show
+    @rooms = @guesthouse.rooms
   end
 
   def edit

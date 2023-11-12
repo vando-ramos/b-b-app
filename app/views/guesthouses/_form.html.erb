@@ -39,7 +39,7 @@
   
   <div>
     <%= f.label :status %>
-    <%= f.select :status, ['Ativa', 'Inativa'] %>
+    <%= f.select :status, ['ativa', 'inativa'] %>
   </div>
 <br>
   <%= f.fields_for :full_address, f.object.full_address || FullAddress.new do |fa| %>Full Address

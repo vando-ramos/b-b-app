@@ -1,0 +1,2 @@
+class CustomPrice < ApplicationRecord
+end

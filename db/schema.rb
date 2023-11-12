@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_10_005855) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_11_144500) do
+  create_table "amenities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "custom_prices", force: :cascade do |t|
+    t.string "daily_price"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "full_addresses", force: :cascade do |t|
     t.string "address"
     t.string "neighborhood"
@@ -58,6 +72,30 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_005855) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "room_amenities", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "amenity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amenity_id"], name: "index_room_amenities_on_amenity_id"
+    t.index ["room_id"], name: "index_room_amenities_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.integer "maximum_guests"
+    t.string "description"
+    t.string "dimension"
+    t.string "daily_price"
+    t.string "status"
+    t.integer "custom_price_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "guesthouse_id", null: false
+    t.index ["custom_price_id"], name: "index_rooms_on_custom_price_id"
+    t.index ["guesthouse_id"], name: "index_rooms_on_guesthouse_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -75,4 +113,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_005855) do
   add_foreign_key "guesthouse_payment_methods", "payment_methods"
   add_foreign_key "guesthouses", "full_addresses"
   add_foreign_key "guesthouses", "users"
+  add_foreign_key "room_amenities", "amenities"
+  add_foreign_key "room_amenities", "rooms"
+  add_foreign_key "rooms", "custom_prices"
+  add_foreign_key "rooms", "guesthouses"
 end
