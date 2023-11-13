@@ -23,7 +23,12 @@ class GuesthousesController < ApplicationController
   end
 
   def show
-    @rooms = @guesthouse.rooms
+    # @rooms = @guesthouse.rooms
+    if current_user == @guesthouse.user
+      @rooms = @guesthouse.rooms
+    else
+      @rooms = @guesthouse.rooms.disponivel
+    end
   end
 
   def edit

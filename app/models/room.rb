@@ -8,4 +8,6 @@ class Room < ApplicationRecord
   accepts_nested_attributes_for :custom_price
 
   validates :name, :description, :maximum_guests, :dimension, :daily_price, :status, presence: true
+
+  enum status: { disponivel: 'Disponível', indisponivel: 'Indisponível' }
 end

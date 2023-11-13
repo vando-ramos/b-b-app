@@ -51,7 +51,7 @@ describe 'User register rooms at their own guesthouse' do
     expect(page).to have_content('1 cama de casal e 1 de solteiro')
     expect(page).to have_content('10 m2')
     expect(page).to have_content('100')
-    expect(page).to have_content('Disponível')
+    expect(page).to have_content('disponivel')
     expect(page).to have_content('TV')
     expect(page).to have_content('De 2023-12-20 até 2024-02-20')
     expect(page).to have_content('150')
