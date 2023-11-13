@@ -4,12 +4,12 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:edit, :update]
 
   def new
-    @room = set_guesthouse.rooms.build
+    @room = @guesthouse.rooms.build
     @room.build_custom_price
   end
 
   def create
-    @room = set_guesthouse.rooms.build(room_params)
+    @room = @guesthouse.rooms.build(room_params)
 
     if @room.save
       redirect_to @guesthouse, notice: 'Room registered successfully!'
@@ -20,16 +20,13 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    if @room.guesthouse == @guesthouse
-      render :edit
-    else
-      redirect_to root_path, alert: "You don't have permission to edit this room!"
+    unless @room && current_user == @guesthouse.user
+      flash.alert = "You don't have permission to edit this room!"
+      redirect_to guesthouse_path
     end
   end
 
   def update
-    @room = set_guesthouse.rooms.find(params[:id])
-
     if @room.update(room_params)
       redirect_to @guesthouse, notice: 'Room updated successfully!'
     else
@@ -59,9 +56,6 @@ def set_guesthouse
 end
 
 def set_room
+  return if @guesthouse.nil?
   @room = @guesthouse.rooms.find_by(id: params[:id])
-
-  unless @room
-    redirect_to @guesthouse, alert: "You don't have permission to edit this room!"
-  end
 end

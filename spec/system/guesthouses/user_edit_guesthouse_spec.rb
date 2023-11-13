@@ -110,7 +110,7 @@ describe 'User edits a guesthouse' do
                                     phone_number: '98765-4321', email: 'hilton@hilton.com', full_address: full_address,
                                     description: 'Em frente a orla', payment_methods: payment_methods, pet_friendly: 'Sim',
                                     terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'ativa',
-                                    user: admin)
+                                    user: host)
 
     login_as(admin)
     visit edit_room_path(guesthouse.id)
