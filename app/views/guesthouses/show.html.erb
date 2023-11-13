@@ -3,11 +3,13 @@
 <%= render 'guesthouse' %>
 
 <% if current_user == @guesthouse.user %>
-  <p><%= link_to 'Edit', edit_guesthouse_path %></p>
+  <p><%= link_to 'Edit Guesthouse', edit_guesthouse_path %></p>
 <% end %>
 
 <h2>Rooms</h2>
-<p><%= link_to 'Register Room', new_room_path %></p>
+<% if current_user == @guesthouse.user %>
+  <p><%= link_to 'Register Room', new_room_path %></p>
+<% end %>
 
 <%= render 'rooms' %>
 

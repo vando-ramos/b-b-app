@@ -1,7 +1,7 @@
 <% @rooms.each do |r| %>
-  <div>
-    <h3><%= r.name %></h3>
-    <div  style='border: 1px solid'>
+  <div style='border: 1px solid'>
+    <h3>- <%= r.name %> -</h3>
+    <div>
       <dl>
         <strong><dt>Description</dt></strong>
         <dd><%= r.description %></dd>
@@ -31,6 +31,11 @@
           $<%= r.custom_price.daily_price %>
         </dd>
       </dl>
-    </div>
+
+      <% if current_user == @guesthouse.user %>
+        <p><%= link_to 'Edit Room', edit_room_path %></p>
+      <% end %>
+    </div>    
   </div>
+  <br>
 <% end %>

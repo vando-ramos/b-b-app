@@ -1,13 +1,13 @@
 <h1>Guesthouses</h1>
 
 <div>
-  <%= link_to 'Register Your Guesthouse', new_guesthouse_path %>
+  <p><%= link_to 'Register Your Guesthouse', new_guesthouse_path %></p>
 </div>
 
 <% @guesthouses.each do |g| %>
-  <div>
+  <div  style='border: 1px solid'>
     <h2><%= link_to g.brand_name, g %></h2>
-    <div style='border: 1px solid'>
+    <div>
       <dl>
         <strong><dt>Full Address</dt></strong>
         <dd>
@@ -26,7 +26,8 @@
         <dd><%= g.description %></dd>
       </dl> 
     </div>  
-  </div>  
+  </div> 
+  <br> 
 <% end %>
 
 <% if @guesthouses.empty? %>

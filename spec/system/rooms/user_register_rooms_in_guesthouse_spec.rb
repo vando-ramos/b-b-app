@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User registers rooms at his own guesthouse' do
+describe 'User register rooms at their own guesthouse' do
   it 'if authenticated' do
     visit root_path
     within('nav') do

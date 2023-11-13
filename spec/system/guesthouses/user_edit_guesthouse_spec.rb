@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'A host user edits a guesthouse' do
+describe 'User edits a guesthouse' do
   it 'if authenticated' do
     visit root_path
     within('nav') do
@@ -29,7 +29,7 @@ describe 'A host user edits a guesthouse' do
     login_as(host)
     visit root_path
     click_on 'Pousada Hilton'
-    click_on 'Edit'
+    click_on 'Edit Guesthouse'
     fill_in 'Brand Name', with: 'Pousada Hilton'
     fill_in 'Corporate Name', with: 'Hilton Corporate'
     fill_in 'Register Number', with: '123456789'
@@ -81,7 +81,7 @@ describe 'A host user edits a guesthouse' do
     login_as(host)
     visit root_path
     click_on 'Pousada Hilton'
-    click_on 'Edit'
+    click_on 'Edit Guesthouse'
     fill_in 'Brand Name', with: ''
     fill_in 'Phone Number', with: ''
     fill_in 'Email', with: ''
@@ -112,10 +112,10 @@ describe 'A host user edits a guesthouse' do
                                     terms: 'Proibido fumar', check_in_time: '8:00', check_out_time: '9:00', status: 'ativa',
                                     user: admin)
 
-    login_as(host)
-    visit edit_guesthouse_path(guesthouse.id)
+    login_as(admin)
+    visit edit_room_path(guesthouse.id)
 
     expect(current_path).to eq(guesthouse_path(guesthouse.id))
-    expect(page).not_to have_link('Edit')
+    expect(page).not_to have_link('Edit Guesthouse')
   end
 end

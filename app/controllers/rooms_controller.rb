@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_guesthouse
+  before_action :set_room, only: [:edit, :update]
 
   def new
     @room = set_guesthouse.rooms.build
@@ -14,6 +16,25 @@ class RoomsController < ApplicationController
     else
       flash.now.alert = 'Unable to register room!'
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    if @room.guesthouse == @guesthouse
+      render :edit
+    else
+      redirect_to root_path, alert: "You don't have permission to edit this room!"
+    end
+  end
+
+  def update
+    @room = set_guesthouse.rooms.find(params[:id])
+
+    if @room.update(room_params)
+      redirect_to @guesthouse, notice: 'Room updated successfully!'
+    else
+      flash.now.alert = 'Unable to update the room!'
+      render :edit, status: :unprocessable_entity
     end
   end
 end
@@ -35,4 +56,12 @@ end
 
 def set_guesthouse
   @guesthouse = current_user.guesthouse
+end
+
+def set_room
+  @room = @guesthouse.rooms.find_by(id: params[:id])
+
+  unless @room
+    redirect_to @guesthouse, alert: "You don't have permission to edit this room!"
+  end
 end
