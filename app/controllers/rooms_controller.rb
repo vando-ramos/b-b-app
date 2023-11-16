@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_guesthouse
-  before_action :set_room, only: [:edit, :update]
+  before_action :set_room, only: %i[show edit update]
 
   def new
     @room = @guesthouse.rooms.build
@@ -17,6 +17,10 @@ class RoomsController < ApplicationController
       flash.now.alert = 'Unable to register room!'
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @custom_prices = CustomPrice.all
   end
 
   def edit

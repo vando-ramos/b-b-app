@@ -1,6 +1,14 @@
+<h2>Rooms</h2>
+
 <% @rooms.each do |r| %>
   <div style='border: 1px solid'>
-    <h3>- <%= r.name %> -</h3>
+    <h3>
+      <% if current_user == @guesthouse.user %>
+        <%= link_to r.name, r %>
+      <% else %>
+        <%= r.name %>
+      <% end %>
+    </h3>
     <div>
       <dl>
         <strong><dt>Description</dt></strong>
@@ -19,17 +27,6 @@
 
         <strong><dt>Daily Price</dt></strong>
         <dd>$<%= r.daily_price %></dd>
-
-        <strong><dt>Status</dt></strong>
-        <dd><%= r.status %></dd>
-
-        <strong><dt>Custom Price</dt></strong>
-        <dd>           
-          De <%= r.custom_price.start_date %> até <%= r.custom_price.end_date %>
-        </dd>
-        <dd>
-          $<%= r.custom_price.daily_price %>
-        </dd>
       </dl>
 
       <% if current_user == @guesthouse.user %>

@@ -1,35 +1,44 @@
+<nav>
+  <% if @cities.present? %>
+    <% @cities.each do |city| %>
+      <%= link_to city, guesthouses_by_city_path(city) %>
+    <% end %>
+  <% else %>
+    <p>No cities available</p>
+  <% end %>
+</nav>
+
 <h1>Guesthouses</h1>
 
 <div>
   <p><%= link_to 'Register Your Guesthouse', new_guesthouse_path %></p>
 </div>
 
-<% @guesthouses.each do |g| %>
+<p>Most Recent</p>
+
+<% @recent_guesthouses.each do |g| %>
   <div  style='border: 1px solid'>
     <h2><%= link_to g.brand_name, g %></h2>
-    <div>
-      <dl>
-        <strong><dt>Full Address</dt></strong>
-        <dd>
-          <%= g.full_address.address %>, <%= g.full_address.number %> - <%= g.full_address.neighborhood %> -
-          <%= g.full_address.city %> - <%= g.full_address.state %> - Zip Code: <%= g.full_address.zip_code %> -
-          Complement: <%= g.full_address.complement %>
-        </dd>
-
-        <strong><dt>Phone Number</dt></strong>
-        <dd><%= g.phone_number %></dd>  
-
-        <strong><dt>Email</dt></strong>
-        <dd><%= g.email %></dd>
-
-        <strong><dt>Description</dt></strong>
-        <dd><%= g.description %></dd>
-      </dl> 
+    <div>              
+      <h3><%= g.full_address.city %> - <%= g.full_address.state %></h3>
     </div>  
   </div> 
   <br> 
 <% end %>
 
-<% if @guesthouses.empty? %>
+<p>Oldest</p>
+
+<% @other_guesthouses.each do |g| %>
+  <div  style='border: 1px solid'>
+    <h2><%= link_to g.brand_name, g %></h2>
+    <div>              
+      <h3><%= g.full_address.city %> - <%= g.full_address.state %></h3>
+    </div>  
+  </div> 
+  <br> 
+<% end %>
+
+
+<% if @recent_guesthouses.empty? && @other_guesthouses.empty? %>
   <p>There is no registered guesthouse!</p>
 <% end %>

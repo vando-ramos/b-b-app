@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User register rooms at their own guesthouse' do
   it 'if authenticated' do
     visit root_path
-    within('nav') do
+    within('header nav') do
       click_on 'Sign in'
     end
 
@@ -31,7 +31,7 @@ describe 'User register rooms at their own guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'Pousada Hilton'
+    click_on 'My Guesthouse'
     click_on 'Register Room'
     fill_in 'Name', with: 'Paris Hilton'
     fill_in 'Maximum Guests', with: '3'
@@ -78,7 +78,7 @@ describe 'User register rooms at their own guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'Pousada Hilton'
+    click_on 'My Guesthouse'
     click_on 'Register Room'
     fill_in 'Name', with: ''
     fill_in 'Maximum Guests', with: ''

@@ -1,0 +1,49 @@
+<h2>Rooms</h2>
+
+<% @rooms.each do |r| %>
+  <div style='border: 1px solid'>
+    <h3>
+      <% if current_user == @guesthouse.user %>
+        <%= link_to r.name, r %>
+      <% else %>
+        <%= r.name %>
+      <% end %>
+    </h3>
+    <div>
+      <dl>
+        <strong><dt>Description</dt></strong>
+        <dd><%= r.description %></dd>
+
+        <strong><dt>Maximum Guests</dt></strong>
+        <dd><%= r.maximum_guests %></dd>
+
+        <strong><dt>Dimension</dt></strong>
+        <dd><%= r.dimension %></dd>
+
+        <strong><dt>Amenities</dt></strong>
+        <% r.amenities.each do |a| %>
+          <dd><%= a.name %></dd>
+        <% end %>
+
+        <strong><dt>Status</dt></strong>
+        <dd><%= r.status %></dd>
+
+        <strong><dt>Daily Price</dt></strong>
+        <dd>$<%= r.daily_price %></dd>        
+
+        <strong><dt>Custom Price</dt></strong>
+        <dd>           
+          De <%= r.custom_price.start_date %> até <%= r.custom_price.end_date %>
+        </dd>
+        <dd>
+          $<%= r.custom_price.daily_price %>
+        </dd>
+      </dl>
+
+      <% if current_user == @guesthouse.user %>
+        <p><%= link_to 'Edit Room', edit_room_path(r) %></p>
+      <% end %>
+    </div>    
+  </div>
+  <br>
+<% end %>

@@ -1,0 +1,17 @@
+<h1><%= @room.name %></h1>
+
+<h2>Custom Price List</h2>
+
+<% @custom_prices.each do |cp| %>
+  <div>
+    <dl>
+      <strong><dt>Custom Price</dt></strong>
+      <dd>           
+        De <%= cp.start_date %> até <%= cp.end_date %>
+      </dd>
+      <dd>
+        $<%= cp.daily_price %>
+      </dd>
+    </dl>
+  </div>
+<% end %>

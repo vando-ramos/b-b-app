@@ -1,0 +1,3 @@
+class Host < User
+
+end

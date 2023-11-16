@@ -23,7 +23,6 @@ class GuesthousesController < ApplicationController
   end
 
   def show
-    # @rooms = @guesthouse.rooms
     if current_user == @guesthouse.user
       @rooms = @guesthouse.rooms
     else

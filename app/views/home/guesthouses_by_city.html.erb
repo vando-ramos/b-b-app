@@ -1,0 +1,11 @@
+<h1>Guesthouses in <%= @city %></h1>
+
+<% if @guesthouses.present? %>
+  <ul>
+    <% @guesthouses.each do |guesthouse| %>
+      <li><%= link_to guesthouse.brand_name, guesthouse_path(guesthouse) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No guesthouses found in <%= @city %></p>
+<% end %>

@@ -13,4 +13,6 @@ class Guesthouse < ApplicationRecord
   validates :register_number, uniqueness: true
 
   enum status: { ativa: 'ativa', inativa: 'inativa' }
+
+  scope :recent, -> { order(created_at: :desc).limit(3) }
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'A host user register your guesthouse' do
   it 'if authenticated' do
     visit root_path
-    within('nav') do
+    within('header nav') do
       click_on 'Sign in'
     end
 

@@ -13,7 +13,7 @@ describe 'User authenticates' do
     end
 
     expect(page).to have_content('Signed in successfully')
-    within('nav') do
+    within('header nav') do
       expect(page).not_to have_link('Sign in')
       expect(page).to have_button('Sign out')
       expect(page).to have_content('host@email.com')
@@ -35,7 +35,7 @@ describe 'User authenticates' do
     expect(page).to have_content('Signed out successfully')
     expect(page).to have_link('Sign in')
     expect(page).not_to have_button('Sign out')
-    within('nav') do
+    within('header nav') do
       expect(page).not_to have_content('host@email.com')
     end
   end

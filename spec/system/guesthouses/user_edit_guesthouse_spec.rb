@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User edits a guesthouse' do
   it 'if authenticated' do
     visit root_path
-    within('nav') do
+    within('header nav') do
       click_on 'Sign in'
     end
 
@@ -28,7 +28,7 @@ describe 'User edits a guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'Pousada Hilton'
+    click_on 'My Guesthouse'
     click_on 'Edit Guesthouse'
     fill_in 'Brand Name', with: 'Pousada Hilton'
     fill_in 'Corporate Name', with: 'Hilton Corporate'
@@ -80,7 +80,7 @@ describe 'User edits a guesthouse' do
 
     login_as(host)
     visit root_path
-    click_on 'Pousada Hilton'
+    click_on 'My Guesthouse'
     click_on 'Edit Guesthouse'
     fill_in 'Brand Name', with: ''
     fill_in 'Phone Number', with: ''

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User sees guesthouse details' do
   it 'if authenticated' do
     visit root_path
-    within('nav') do
+    within('header nav') do
       click_on 'Sign in'
     end
 
@@ -28,7 +28,7 @@ describe 'User sees guesthouse details' do
 
     login_as(host)
     visit root_path
-    click_on 'Pousada Hilton'
+    click_on 'My Guesthouse'
 
     expect(page).to have_content('Pousada Hilton')
     expect(page).to have_content('Hilton Corporate')

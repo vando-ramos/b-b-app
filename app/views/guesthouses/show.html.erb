@@ -1,20 +1,17 @@
 <h1><%= @guesthouse.brand_name %></h1>
-
-<%= render 'guesthouse' %>
-
+<hr>
 <% if current_user == @guesthouse.user %>
+  <%= render 'guesthouse_host' %>
   <p><%= link_to 'Edit Guesthouse', edit_guesthouse_path %></p>
-<% end %>
-
-<h2>Rooms</h2>
-<% if current_user == @guesthouse.user %>
+  <hr>
+  <%= render 'rooms_host' %>
   <p><%= link_to 'Register Room', new_room_path %></p>
+<% else %>
+  <%= render 'guesthouse_guest' %>
+  <hr>
+  <%= render 'rooms_guest' %>
 <% end %>
-
-<%= render 'rooms' %>
 
 <% if @rooms.empty? %>
   <p>There are no registered rooms!</p>
 <% end %>
-
-

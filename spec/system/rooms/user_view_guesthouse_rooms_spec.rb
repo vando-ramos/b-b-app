@@ -19,9 +19,8 @@ describe 'A user sees the rooms of a guesthouse' do
                                     check_out_time: '9:00', status: 'ativa', user: host)
 
     am1 = Amenity.create!(name: 'Varanda')
-    am2 = Amenity.create!(name: 'Ar Condicionado')
-    am3 = Amenity.create!(name: 'TV')
-    amenities = [am1, am2, am3]
+    am2 = Amenity.create!(name: 'TV')
+    amenities = [am1, am2]
 
     custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
 
@@ -114,7 +113,7 @@ describe 'A user sees the rooms of a guesthouse' do
     expect(page).to have_content('There are no registered rooms')
   end
 
-  it 'and only available rooms' do
+  it 'but only available rooms' do
     host = User.create!(email: 'host@email.com', password: '123456')
 
     full_address = FullAddress.create!(address: 'Av Atlântica', number: 500, neighborhood: 'Copacabana',
