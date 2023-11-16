@@ -29,15 +29,7 @@
         <dd><%= r.status %></dd>
 
         <strong><dt>Daily Price</dt></strong>
-        <dd>$<%= r.daily_price %></dd>        
-
-        <strong><dt>Custom Price</dt></strong>
-        <dd>           
-          De <%= r.custom_price.start_date %> até <%= r.custom_price.end_date %>
-        </dd>
-        <dd>
-          $<%= r.custom_price.daily_price %>
-        </dd>
+        <dd>$<%= r.daily_price %></dd>             
       </dl>
 
       <% if current_user == @guesthouse.user %>

@@ -1,0 +1,27 @@
+<h1>New Custom Price</h1>
+
+<% if @custom_price.errors.any? %>
+  <p>Check the errors below:</p>
+  <ul>
+    <% @custom_price.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<%= form_with model: @custom_price, url: room_custom_prices_path(@room) do |f| %>  
+  <div>
+    <%= f.label :daily_price, 'Daily Price $' %>
+    <%= f.text_field :daily_price %>
+
+    <%= f.label :start_date, 'Start Date' %>
+    <%= f.date_field :start_date %>
+
+    <%= f.label :end_date, 'End Date' %>
+    <%= f.date_field :end_date %>
+  </div>
+  <div>
+    <p><%= f.submit 'Send' %></p>
+  </div>
+<% end %>

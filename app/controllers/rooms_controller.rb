@@ -5,7 +5,6 @@ class RoomsController < ApplicationController
 
   def new
     @room = @guesthouse.rooms.build
-    @room.build_custom_price
   end
 
   def create
@@ -50,7 +49,6 @@ def room_params
     :dimension,
     :daily_price,
     :status,
-    custom_price_attributes: [:daily_price, :start_date, :end_date],
     amenity_ids: []
   )
 end

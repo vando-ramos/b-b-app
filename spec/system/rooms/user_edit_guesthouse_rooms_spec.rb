@@ -31,11 +31,9 @@ describe 'User edit guesthouse rooms' do
     am2 = Amenity.create!(name: 'TV')
     amenities = [am1, am2]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                 dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                amenities: amenities, guesthouse: guesthouse)
 
     login_as(host)
     visit root_path
@@ -48,9 +46,6 @@ describe 'User edit guesthouse rooms' do
     fill_in 'Normal Price', with: '100'
     select 'Disponível', from: 'Status'
     check 'TV'
-    fill_in 'Custom Price', with: '150'
-    fill_in 'Start Date', with: '2023-12-20'
-    fill_in 'End Date', with: '2024-02-20'
     click_on 'Send'
 
     expect(page).to have_content('Room updated successfully')
@@ -81,11 +76,9 @@ describe 'User edit guesthouse rooms' do
     am2 = Amenity.create!(name: 'TV')
     amenities = [am1, am2]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                 dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                amenities: amenities, guesthouse: guesthouse)
 
     login_as(host)
     visit root_path
@@ -124,11 +117,9 @@ describe 'User edit guesthouse rooms' do
     am2 = Amenity.create!(name: 'TV')
     amenities = [am1, am2]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     room = Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                         dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                        amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                        amenities: amenities, guesthouse: guesthouse)
 
     login_as(admin)
     visit edit_room_path(room.id)

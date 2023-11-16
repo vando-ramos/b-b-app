@@ -22,20 +22,7 @@
   <div>
     <%= f.label :status %>
     <%= f.select :status, ['Disponível', 'Indisponível'] %>
-  </div>
-
-  <%= f.fields_for :custom_price, f.object.custom_price || CustomPrice.new do |cp| %>
-    <div>
-      <%= cp.label :daily_price, 'Custom Price' %> $
-      <%= cp.text_field :daily_price %>    
-    
-      <%= cp.label :start_date, 'Start Date' %>
-      <%= cp.date_field :start_date %>    
-    
-      <%= cp.label :end_date, 'End Date' %>
-      <%= cp.date_field :end_date %>    
-    </div> 
-  <% end %>
+  </div>  
 
   <%= f.label :amenity_ids, 'Amenities' %>
   <%= f.collection_check_boxes :amenity_ids, Amenity.all, :id, :name %>

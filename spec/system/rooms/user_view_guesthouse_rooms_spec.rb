@@ -22,11 +22,9 @@ describe 'A user sees the rooms of a guesthouse' do
     am2 = Amenity.create!(name: 'TV')
     amenities = [am1, am2]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                 dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                amenities: amenities, guesthouse: guesthouse)
 
     visit root_path
     click_on 'Pousada Hilton'
@@ -71,15 +69,13 @@ describe 'A user sees the rooms of a guesthouse' do
     am3 = Amenity.create!(name: 'TV')
     amenities = [am1, am2, am3]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                 dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse1)
+                amenities: amenities, guesthouse: guesthouse1)
 
     Room.create!(name: 'Quarto 101', maximum_guests: 1, description: '1 cama de solteiro',
                 dimension: '3 m2', daily_price: '60', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse2)
+                amenities: amenities, guesthouse: guesthouse2)
 
     visit root_path
     click_on 'Pousada Hilton'
@@ -134,15 +130,13 @@ describe 'A user sees the rooms of a guesthouse' do
     am2 = Amenity.create!(name: 'TV')
     amenities = [am1, am2]
 
-    custom_price = CustomPrice.create!(daily_price: '150', start_date: '2023-12-20', end_date: '2024-02-20')
-
     Room.create!(name: 'Paris Hilton', maximum_guests: 3, description: '1 cama de casal e 1 de solteiro',
                 dimension: '10 m2', daily_price: '100', status: 'Disponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                amenities: amenities, guesthouse: guesthouse)
 
     Room.create!(name: 'Madona', maximum_guests: 1, description: '1 cama de solteiro',
                 dimension: '3 m2', daily_price: '80', status: 'Indisponível',
-                amenities: amenities, custom_price: custom_price, guesthouse: guesthouse)
+                amenities: amenities, guesthouse: guesthouse)
 
     visit root_path
     click_on 'Pousada Hilton'
