@@ -16,13 +16,23 @@
         <h1>B&B</h1>
       <% end %>
       <nav>
-        <% if user_signed_in? %>
-          <%= link_to 'My Guesthouse', current_user.guesthouse %> |
-          <%= current_user.email %>
-          <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
-        <% else %>          
-          <%= link_to 'Sign in', new_user_session_path %>
-        <% end %>
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to 'My Guesthouse', current_user.guesthouse %> |
+            <%= current_user.email %>
+            <p><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></p>
+          <% else %>          
+            <%= link_to 'Sign in', new_user_session_path %>
+          <% end %>
+        </div>
+
+        <div class='search'>
+          <%= form_with url: search_guesthouses_path, method: :get do |f| %>
+            <%= f.label :query, 'Search Guesthouse' %>
+            <%= f.text_field :query %>
+            <%= f.submit 'Search' %>
+          <% end %>
+        </div>
       </nav>      
     </header>
     <main>

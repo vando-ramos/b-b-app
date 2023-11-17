@@ -6,7 +6,7 @@ describe 'User authenticates' do
 
     visit root_path
     click_on 'Sign in'
-    within('form') do
+    within('.sign-form') do
       fill_in 'Email', with: 'host@email.com'
       fill_in 'Password', with: '123456'
       click_on 'Sign in'
@@ -25,7 +25,7 @@ describe 'User authenticates' do
 
     visit root_path
     click_on 'Sign in'
-    within('form') do
+    within('.sign-form') do
       fill_in 'Email', with: 'host@email.com'
       fill_in 'Password', with: '123456'
       click_on 'Sign in'

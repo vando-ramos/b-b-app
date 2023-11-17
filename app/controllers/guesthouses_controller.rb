@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!, except: %i[show]
+  before_action :authenticate_user!, except: %i[show search]
   before_action :set_guesthouse, only: %i[show edit update]
 
   def new
@@ -28,6 +28,11 @@ class GuesthousesController < ApplicationController
     else
       @rooms = @guesthouse.rooms.disponivel
     end
+  end
+
+  def search
+    @query = params['query']
+    @guesthouses = Guesthouse.joins(:full_address).where('brand_name LIKE ? OR neighborhood LIKE ? OR city LIKE ?', "%#{@query}%", "%#{@query}%", "%#{@query}%").order(:brand_name)
   end
 
   def edit

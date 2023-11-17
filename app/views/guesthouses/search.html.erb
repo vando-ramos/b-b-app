@@ -1,0 +1,13 @@
+<h1>Search results for: <%= @query %></h1>
+
+<% @guesthouses.each do |g| %>
+  <p><%= @guesthouses.count %> found</p>
+
+  <div  style='border: 1px solid'>
+    <h2><%= link_to g.brand_name, g %></h2>
+    <div>              
+      <h3><%= g.full_address.city %> - <%= g.full_address.state %></h3>
+    </div>  
+  </div> 
+  <br> 
+<% end %>

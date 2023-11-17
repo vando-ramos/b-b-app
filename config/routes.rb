@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
-  resources :guesthouses, only: %i[show new create edit update]
+  resources :guesthouses, only: %i[show new create edit update] do
+    get 'search', on: :collection
+  end
   resources :rooms do
     resources :custom_prices, only: %i[show new create edit update]
   end
