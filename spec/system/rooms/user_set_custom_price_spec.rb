@@ -40,10 +40,12 @@ describe 'User set custom price for a room' do
     click_on 'My Guesthouse'
     click_on 'Paris Hilton'
     click_on 'New Custom Price'
-    fill_in 'Daily Price', with: '150'
-    fill_in 'Start Date', with: '2023-12-20'
-    fill_in 'End Date', with: '2024-02-20'
-    click_on 'Send'
+    within('.custom_price-form') do
+      fill_in 'Daily Price', with: '150'
+      fill_in 'Start Date', with: '2023-12-20'
+      fill_in 'End Date', with: '2024-02-20'
+      click_on 'Send'
+    end
 
     expect(page).to have_content('Custom price set successfully')
     expect(page).to have_content('De 2023-12-20 até 2024-02-20')
@@ -82,10 +84,12 @@ describe 'User set custom price for a room' do
     click_on 'My Guesthouse'
     click_on 'Paris Hilton'
     click_on 'New Custom Price'
-    fill_in 'Daily Price', with: '150'
-    fill_in 'Start Date', with: '2023-12-20'
-    fill_in 'End Date', with: '2024-02-20'
-    click_on 'Send'
+    within('.custom_price-form') do
+      fill_in 'Daily Price', with: '150'
+      fill_in 'Start Date', with: '2023-12-20'
+      fill_in 'End Date', with: '2024-02-20'
+      click_on 'Send'
+    end
 
     expect(page).to have_content('There should be no overlapping dates')
     expect(page).not_to have_content('De 2023-12-20 até 2024-02-20')

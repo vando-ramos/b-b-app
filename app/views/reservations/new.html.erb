@@ -1,0 +1,27 @@
+<h1>New Booking</h1>
+
+<div class='reservation-form'>
+  <%= form_with model: [@room, @reservation] do |f| %>
+    <div>
+      <%= f.label :start_date, 'Start Date' %>
+      <%= f.date_field :start_date %>
+
+      <%= f.label :end_date, 'End Date' %>
+      <%= f.date_field :end_date %>
+    </div>
+
+    <div>
+      <%= f.label :num_guests, 'Number of Guests' %>
+      <%= f.number_field :num_guests %>    
+    </div>
+
+    <div>
+      <%= f.label :status %>
+      <%= f.select :status, ['pending', 'confirmed', 'canceled'] %>
+    </div>
+
+    <div>
+      <%= f.submit 'Send' %>
+    </div>
+  <% end %>
+</div>

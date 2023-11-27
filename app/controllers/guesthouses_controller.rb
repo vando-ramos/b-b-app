@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!, except: %i[show search]
+  before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_guesthouse, only: %i[show edit update]
 
   def new

@@ -29,6 +29,8 @@
         <dd>$<%= r.daily_price %></dd>
       </dl>
 
+      <p><%= link_to 'Book', new_room_reservation_path(r) %></p>
+
       <% if current_user == @guesthouse.user %>
         <p><%= link_to 'Edit Room', edit_room_path %></p>
       <% end %>
