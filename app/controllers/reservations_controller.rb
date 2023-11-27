@@ -10,7 +10,9 @@ class ReservationsController < ApplicationController
 
     if @reservation.valid? && @room.available?(@reservation.start_date, @reservation.end_date, @reservation.num_guests)
       @total_price = @reservation.total_price
-      render :show_total_price
+      render :show_total_price, locals: { start_date: @reservation.start_date,
+                                          end_date: @reservation.end_date,
+                                          num_guests: @reservation.num_guests }
     else
       flash.now.alert = 'Sorry, the room is not available for the selected dates or does not have enough capacity for the number of guests.'
       render 'new'
@@ -19,6 +21,8 @@ class ReservationsController < ApplicationController
 
   def show_total_price
     @total_price = @reservation.total_price
+
+    @room = @guesthouse.rooms.find_by(id: params[:id])
   end
 
   private

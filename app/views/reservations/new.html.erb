@@ -1,7 +1,32 @@
+<hr>
 <h1>New Booking</h1>
 
+<hr>
+<h1><%= @room.name %></h1>
+
+<div>
+  <dl>
+    <strong><dt>Description</dt></strong>
+    <dd><%= @room.description %></dd>
+
+    <strong><dt>Maximum Guests</dt></strong>
+    <dd><%= @room.maximum_guests %></dd>
+
+    <strong><dt>Dimension</dt></strong>
+    <dd><%= @room.dimension %></dd>
+
+    <strong><dt>Amenities</dt></strong>
+    <% @room.amenities.each do |a| %>
+      <dd><%= a.name %></dd>
+    <% end %>
+
+    <strong><dt>Daily Price</dt></strong>
+    <dd>$<%= @room.daily_price %></dd>
+  </dl> 
+</div>
+
 <div class='reservation-form'>
-  <%= form_with model: [@room, @reservation] do |f| %>
+  <%= form_with model: [@room, @reservation], data: { turbo: false } do |f| %>
     <div>
       <%= f.label :start_date, 'Start Date' %>
       <%= f.date_field :start_date %>
@@ -21,7 +46,7 @@
     </div>
 
     <div>
-      <%= f.submit 'Send' %>
+      <p><%= f.submit 'Send' %></p>
     </div>
   <% end %>
 </div>

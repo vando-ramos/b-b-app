@@ -1,2 +1,12 @@
-<h1>Total Price</h1>
-<%= @total_price %>
+<hr>
+
+<h1>Total Price: $<%= @total_price %></h1>
+
+<h2>
+  <p>De <%= start_date %> até <%= end_date %></p>
+  <p>Number of Guests: <%= num_guests %></p>
+</h2>
+
+<%= link_to 'Confirm Booking' %>
+
+
